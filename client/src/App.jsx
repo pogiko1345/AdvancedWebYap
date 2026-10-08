@@ -9,7 +9,7 @@ function App() {
   const [age, setAge] = useState("");
   const [editingId, setEditingId] = useState(null);
 
-  const API_URL = "Localhost";
+  const API_URL = "https://advanced-web-yap-mu.vercel.app/";
 
   useEffect(() => {
     fetchStudents();
