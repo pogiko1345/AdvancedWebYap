@@ -9,7 +9,7 @@ function App() {
   const [age, setAge] = useState("");
   const [editingId, setEditingId] = useState(null);
 
-  const API_URL = "https://advancedwebyap-src.vercel.app";
+  const API_URL = "https://advancedwebyap-src.vercel.app/students";
 
   useEffect(() => {
     fetchStudents();
@@ -38,21 +38,16 @@ function App() {
   const handleSubmit = async () => {
     try {
       if (editingId) {
-        const response = await axios.put(
-          `${API_URL}/${editingId}`,
-          {
-            name,
-            course,
-            age,
-          }
-        );
+        const response = await axios.put(`${API_URL}/${editingId}`, {
+          name,
+          course,
+          age,
+        });
 
         setStudents(
           students.map((student) =>
-            student._id === editingId
-              ? response.data
-              : student
-          )
+            student._id === editingId ? response.data : student,
+          ),
         );
 
         setEditingId(null);
@@ -78,21 +73,17 @@ function App() {
     try {
       await axios.delete(`${API_URL}/${id}`);
 
-      setStudents(
-        students.filter((student) => student._id !== id)
-      );
+      setStudents(students.filter((student) => student._id !== id));
     } catch (error) {
       console.error("Error deleting student:", error);
     }
   };
 
   return (
-    <>
+    <div className="App">
       <h1>Student Management System</h1>
 
-      <h2>
-        {editingId ? "Edit Student" : "Add Student"}
-      </h2>
+      <h2>{editingId ? "Edit Student" : "Add Student"}</h2>
 
       <input
         type="text"
@@ -140,34 +131,21 @@ function App() {
             <p>
               <strong>Name:</strong> {student.name}
             </p>
-
             <p>
               <strong>Course:</strong> {student.course}
             </p>
-
             <p>
               <strong>Age:</strong> {student.age}
             </p>
 
-            <button
-              onClick={() => handleEdit(student._id)}
-            >
-              Edit
-            </button>
+            <button onClick={() => handleEdit(student._id)}>Edit</button>
 
-            <button
-              onClick={() => handleDelete(student._id)}
-              style={{ marginLeft: "10px" }}
-            >
-              Delete
-            </button>
+            <button onClick={() => handleDelete(student._id)}>Delete</button>
 
             <hr />
           </div>
         ))
       )}
-    </>
+    </div>
   );
 }
-
-export default App;
