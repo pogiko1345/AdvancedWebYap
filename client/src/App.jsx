@@ -9,7 +9,7 @@ function App() {
   const [age, setAge] = useState("");
   const [editingId, setEditingId] = useState(null);
 
-  const API_URL = "https://advancedwebyap-src.vercel.app/students";
+  const API_URL = "Localhost";
 
   useEffect(() => {
     fetchStudents();
