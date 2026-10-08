@@ -9,7 +9,7 @@ function App() {
   const [age, setAge] = useState("");
   const [editingId, setEditingId] = useState(null);
 
-  const API_URL = "https://advanced-web-yap-mu.vercel.app/";
+  const API_URL = "http://localhost:5000/students";
 
   useEffect(() => {
     fetchStudents();
@@ -131,16 +131,25 @@ function App() {
             <p>
               <strong>Name:</strong> {student.name}
             </p>
+
             <p>
               <strong>Course:</strong> {student.course}
             </p>
+
             <p>
               <strong>Age:</strong> {student.age}
             </p>
 
             <button onClick={() => handleEdit(student._id)}>Edit</button>
 
-            <button onClick={() => handleDelete(student._id)}>Delete</button>
+            <button
+              onClick={() => handleDelete(student._id)}
+              style={{
+                marginLeft: "10px",
+              }}
+            >
+              Delete
+            </button>
 
             <hr />
           </div>
@@ -149,4 +158,5 @@ function App() {
     </div>
   );
 }
+
 export default App;
